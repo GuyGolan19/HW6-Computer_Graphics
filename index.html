@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Basketball Court 3D - HW06 Interactive Game</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+      background-color: #1a1a1a;
+    }
+
+    .ui-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    .score-panel {
+      position: absolute;
+      top: 25px;
+      left: 25px;
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: bold;
+      background: linear-gradient(135deg, rgba(255, 102, 0, 0.9), rgba(255, 140, 0, 0.8));
+      padding: 16px 22px;
+      border-radius: 12px;
+      border: 2px solid #ff6600;
+      pointer-events: auto;
+      box-shadow: 0 4px 15px rgba(255, 102, 0, 0.3);
+      line-height: 1.6;
+    }
+
+    .power-panel {
+      position: absolute;
+      top: 200px;
+      left: 25px;
+      color: #ffffff;
+      font-size: 16px;
+      background: rgba(0, 0, 0, 0.75);
+      padding: 12px 18px;
+      border-radius: 10px;
+      pointer-events: auto;
+      border: 1px solid #ffaa00;
+    }
+
+    .power-bar {
+      width: 160px;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 5px;
+      margin-top: 5px;
+      overflow: hidden;
+    }
+
+    .power-fill {
+      height: 100%;
+      background: linear-gradient(to right, #00ff00, #ffff00, #ff0000);
+      width: 50%;
+      transition: width 0.1s;
+    }
+
+    .control-panel {
+      position: absolute;
+      bottom: 25px;
+      left: 25px;
+      color: #ffffff;
+      font-size: 16px;
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.85), rgba(40, 40, 40, 0.85));
+      padding: 18px 22px;
+      border-radius: 12px;
+      border: 2px solid #ffffff;
+      pointer-events: auto;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .control-panel h3 {
+      margin: 0 0 12px 0;
+      color: #ff6600;
+      font-size: 18px;
+    }
+
+    .control-panel p {
+      margin: 8px 0;
+      line-height: 1.4;
+    }
+
+    .info-panel {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+      color: #ffffff;
+      font-size: 15px;
+      background: linear-gradient(135deg, rgba(34, 139, 34, 0.9), rgba(50, 205, 50, 0.8));
+      padding: 16px 20px;
+      border-radius: 12px;
+      border: 2px solid #32cd32;
+      pointer-events: auto;
+      box-shadow: 0 4px 15px rgba(34, 139, 34, 0.3);
+    }
+
+    #game-message {
+      position: absolute;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 28px;
+      font-weight: bold;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 14px 24px;
+      border-radius: 12px;
+      opacity: 0;
+      transition: opacity 0.5s;
+      z-index: 2000;
+    }
+
+    .highlight {
+      color: #ff6600;
+      font-weight: bold;
+    }
+  </style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+  <!-- UI Overlay Elements -->
+  <div class="ui-overlay">
+    <div class="info-panel">
+      <div><strong>🏀 Basketball Court 3D</strong></div>
+      <div>HW06 - Interactive Game</div>
+    </div>
+
+    <div class="score-panel" id="score-ui">
+      Score: <span id="score">0</span><br>
+      Attempts: <span id="shot-attempts">0</span><br>
+      Made: <span id="shots-made">0</span><br>
+      Accuracy: <span id="accuracy">0%</span>
+    </div>
+
+
+    <div class="power-panel">
+      <div><strong>Shot Power</strong></div>
+      <div class="power-bar">
+        <div class="power-fill" id="power-fill" style="width: 50%;"></div>
+      </div>
+      <div id="power-text">50%</div>
+    </div>
+
+    <div class="control-panel">
+      <h3>🎮 Game Controls</h3>
+      <p><span class="highlight">Arrow Keys:</span> Move basketball</p>
+      <p><span class="highlight">W / S:</span> Increase / Decrease power</p>
+      <p><span class="highlight">Spacebar:</span> Shoot</p>
+      <p><span class="highlight">R:</span> Reset ball</p>
+      <p><span class="highlight">O:</span> Toggle orbit controls</p>
+    </div>
+  </div>
+
+  <div id="game-message"></div>
+
+  <!-- Game Scripts -->
+  <script type="module" src="src/hw5.js"></script>
+  <script type="module" src="src/hw6.js"></script>
+</body>
+</html>
